@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <style>
+        .color-amarillo {
+            background-color: #f0d000;
+        }
+
+        table {
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0px 2px 2px rgb(126 126 126);
+            border: none;
+            border-spacing: unset;
+            border-collapse: collapse;
+        }
+
+        table thead {
+            border-radius: 5px;
+        }
+
+        table thead tr {
+            height: 60px;
+        }
+
+        table thead tr th {
+            text-align: center;
+            font-size: 20px;
+            position: sticky;
+            top: 0;
+            box-shadow: 0px 0px 0 2px #e8e8e8;
+        }
+
+        table tbody tr {
+            border-bottom: 2px solid #e6f7ff;
+            height: 60px;
+        }
+
+        table tbody tr:hover {
+            background: #fcffe5;
+        }
+
+        table tbody tr td {
+            text-align: center;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Reporte</h1>
+    <table>
+        <thead>
+            <tr>
+                <th className="color-amarillo">Fecha</th>
+                <th className="color-amarillo">Cliente</th>
+                <th className="color-amarillo">Numero de cuenta</th>
+                <th className="color-amarillo">Tipo</th>
+                <th className="color-amarillo">Saldo inicial</th>
+                <th className="color-amarillo">Estado</th>
+                <th className="color-amarillo">Movimiento</th>
+                <th className="color-amarillo">Saldo Disponible</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item, iterStat: ${movimientosDTO}">
+                <td th:text="${item.fecha}"></td>
+                <td th:text="${item.cliente}"></td>
+                <td th:text="${item.numeroCuenta}"></td>
+                <td th:text="${item.tipo}"></td>
+                <td th:text="${item.saldoInicial}"></td>
+                <td th:text="${item.estado}"></td>
+                <td th:text="${item.movimiento}"></td>
+                <td th:text="${item.saldoDisponible}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

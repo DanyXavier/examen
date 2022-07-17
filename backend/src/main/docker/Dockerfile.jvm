@@ -1,0 +1,25 @@
+#ANTES DE CONSTRUIR LA IMAGEN EJECUTA
+# ./mvnw package
+# DESPUES, CONSTRUYE LA IMAGEN CON
+# docker build -f src/main/docker/Dockerfile.jvm -t spring/backend-jvm .
+# Ejecuta el contenedor usando
+# docker run -i --rm -p 8080:8080 spring/backend-jvm
+# definiendo las variables de base de datos
+# docker run -i --rm -e MYSQL_HOST=192.168.3.104 -e MYSQL_USERNAME=examen -e MYSQL_PASSWORD=examen -p 8080:8080 spring/backend-jvm
+FROM registry.access.redhat.com/ubi8/openjdk-11:1.11
+
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
+
+ARG JAR_FILE=target/*.jar
+
+COPY --chown=185 ${JAR_FILE} /deployments/spring/app-run.jar
+
+EXPOSE 8080
+USER 185
+
+ENV JAVA_APP_JAR="/deployments/spring/app-run.jar"
+#ENV MYSQL_HOST=192.168.3.104
+#ENV MYSQL_USERNAME=examen
+#ENV MYSQL_PASSWORD=examen
+
+ENTRYPOINT ["java","-jar","/deployments/spring/app-run.jar"]
